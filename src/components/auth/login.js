@@ -6,7 +6,7 @@ export default class Login extends Component {
     super(props);
 
     this.state = {
-      email: "",
+      email: "", 
       password: "",
       errorText: ""
     };
@@ -15,7 +15,8 @@ export default class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   // alexrunner002@gmail.com
-  //Runner1994@
+  //Runner1994@ 
+  //health4me app.
 
   handleChange(event) {
     this.setState({
@@ -40,17 +41,22 @@ export default class Login extends Component {
     ).then(response => {
       if (response.data.status === 'created') {
         console.log("You can come in...")
+        this.props.handleSuccessfulAuth();
       } else {
         this.setState({
           errorText: "Wrong email or password"
-        })
+        });
+        this.handleUnsuccessfulAuth();
       }
     })
     .catch(error => {
       this.setState({
         errorText: "An error occured"
-      })
+        
+      });
+      this.handleUnsuccessfulAuth();
     });
+
     event.preventDefault();
   }
 
