@@ -67,7 +67,7 @@ export default class Login extends Component {
 
         <div>{this.state.errorText}</div>
 
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}/*<---This is the normal way to work with forms if it is only text values*/> 
           <input
             type="email"
             name="email"
