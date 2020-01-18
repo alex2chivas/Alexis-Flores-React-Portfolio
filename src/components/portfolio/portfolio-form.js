@@ -142,7 +142,7 @@ export default class PortfolioForm extends Component {
     withCredentials: true
   })
     .then(response => {
-      this.props.handleSuccessfulFormSubmission(response.data.portfolio_item);
+      this.state.editMode ? this.props.handleEditFormSubmission() : this.props.handleNewFormSubmission(response.data.portfolio_item);
 
       this.setState ({ // Note //Highly discourage to do State manually on .then() function after a API call
         name:"",        // Note // This are only our state and we need to learn the form
@@ -152,7 +152,11 @@ export default class PortfolioForm extends Component {
         url: "",
         thumb_image: "",
         banner_image: "",
-        logo: ""
+        logo: "",
+        editMode: false, 
+        apiUrl: "https://alexisflores.devcamp.space/portfolio/portfolio_items",
+        apiAction: "post"
+  
       });
   
       [this.thumbRef, this.bannerRef, this.logoRef].forEach((ref) => {
