@@ -46,6 +46,7 @@ export default class PortfolioForm extends Component {
 
   componentDidUpdate() { // Note // const obj1 = {} // Object.keys(obj1).length will return 0 in this case
     if (Object.keys(this.props.portfolioToEdit).length > 0) {
+      // Question //debugger;
       const {
         id,
         name,
@@ -70,10 +71,9 @@ export default class PortfolioForm extends Component {
         editMode: true,
         apiUrl: `https://alexisflores.devcamp.space/portfolio/portfolio_items/${id}`,
         apiAction: "patch",
-        thumb_image: thumb_image_url || "",
-        banner_image: banner_image_url || "",
-        logo: logo_url || ""
-
+        thumb_image_url: thumb_image_url || "", // Note // We had change the key name from thumb_image to thumb_image_url ti help with a bug when the status was on editMode on the web page/ -When we dropped in image into something that did not have an image it show the image blank
+        banner_image_url: banner_image_url || "", // Question / Ask about the names
+        logo_url: logo_url || ""
       });
     };
   }
@@ -204,9 +204,9 @@ export default class PortfolioForm extends Component {
         </div>
 
         <div className="image-uploaders">
-          { this.state.thumb_image && this.state.editMode ? 
+          { this.state.thumb_image_url && this.state.editMode ? 
             <div className="portfolio-manager-image-wrapper">
-              <img src={this.state.thumb_image} />
+              <img src={this.state.thumb_image_url} />
               <div className="image-removal-link" /* Note -- We use this method because we do not want the function to fire unless a user has clicked on the record */ >
                 <a onClick={() => this.deleteImage("thumb_image")} >
                   <FontAwesomeIcon icon="minus-circle"/>
@@ -224,9 +224,9 @@ export default class PortfolioForm extends Component {
             </DropzoneComponent>
           }
 
-          { this.state.banner_image && this.state.editMode ? 
+          { this.state.banner_image_url && this.state.editMode ? 
             <div className="portfolio-manager-image-wrapper">
-              <img src={this.state.banner_image} />
+              <img src={this.state.banner_image_url} />
               <div className="image-removal-link">              
                 <a onClick={() => this.deleteImage("banner_image")} >
                   <FontAwesomeIcon icon="minus-circle"/>
@@ -245,9 +245,9 @@ export default class PortfolioForm extends Component {
             </DropzoneComponent>
           } 
 
-          { this.state.logo && this.state.editMode ? 
+          { this.state.logo_url && this.state.editMode ? 
             <div className="portfolio-manager-image-wrapper">
-              <img src={this.state.logo}/>
+              <img src={this.state.logo_url}/>
 
               <div className="image-removal-link">              
                 <a onClick={() => this.deleteImage("logo")} >
