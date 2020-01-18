@@ -20,7 +20,7 @@ export default class PortfolioForm extends Component {
       logo: "",
       editMode: false, // Note // This helps create dynamic axio request with personalize Config setting in axios
       apiUrl: "https://alexisflores.devcamp.space/portfolio/portfolio_items",
-      apiAction: 'post'
+      apiAction: "post"
 
     };
 
