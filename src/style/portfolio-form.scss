@@ -24,6 +24,16 @@
           background-color: $teal;
         }
       }
+
+      .image-removal-link {
+        display: flex;
+        justify-content: center;
+        a {
+          cursor: pointer;
+          color: $warning;
+          font-size: 1.5rem;
+        }
+      }
     }
   }
 }
