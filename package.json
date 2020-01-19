@@ -15,14 +15,7 @@
     "url": "git@github.com:bottega-code-school/js-builder.git"
   },
   "quokka": {
-    "plugins": [
-      "jsdom-quokka-plugin"
-    ],
-    "babel": {
-      "presets": [
-        "react-app"
-      ]
-    }
+    "babel": true
   },
   "keywords": [
     "es6",

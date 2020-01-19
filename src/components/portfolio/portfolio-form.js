@@ -11,7 +11,7 @@ export default class PortfolioForm extends Component {
     super(props);
 
     this.state = {
-      name:"",
+      name:"", 
       description: "",
       category: "eCommerce",
       position: "",
@@ -57,7 +57,7 @@ export default class PortfolioForm extends Component {
 
   componentDidUpdate() { // Note // const obj1 = {} // Object.keys(obj1).length will return 0 in this case
     if (Object.keys(this.props.portfolioToEdit).length > 0) {
-      // Question //debugger;
+      /* Question */ // debugger;
       const {
         id,
         name,
@@ -74,7 +74,7 @@ export default class PortfolioForm extends Component {
 
       this.setState({
         id: id,
-        name: name || "",
+        name: name || "", 
         description: description || "",
         category: category || "eCommerce",
         position: position || "",
@@ -182,11 +182,12 @@ export default class PortfolioForm extends Component {
       });
   
       [this.thumbRef, this.bannerRef, this.logoRef].forEach((ref) => {
+        // debugger;
         ref.current.dropzone.removeAllFiles(); //Note // ref.current is reaching into the specific item
       })                                        // This will help clear the drop zones
     })
     .catch(error => {
-      console.log("portolfio form handleSubmit error", error)
+      console.log("portfolio form handleSubmit error", error)
     });
 
     event.preventDefault();
@@ -232,7 +233,7 @@ export default class PortfolioForm extends Component {
                 djsConfig={this.djsConfig()}
                 eventHandlers={this.handleThumbDrop()}
             >
-              <div className="dz-message">Thumbnail</div>
+              <div className="dz-message" /*Note // This is child property of DropzoneComponent*/>Thumbnail</div>
             </DropzoneComponent>
           }
 
