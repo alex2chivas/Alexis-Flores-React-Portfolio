@@ -41,7 +41,18 @@ export default class PortfolioForm extends Component {
   }
 
   deleteImage(imageType){
-    console.log("printImage", imageType)
+    axios.delete(`https://alexisflores.devcamp.space/portfolio/delete-portfolio-image/${this.state.id}?image_type=${imageType}`, //Note //Most API will let you had a question mark so you can add addtional information)
+    {
+      withCredentials: true
+    }).then(response => {
+      if(response.status === 200) {
+        this.setState({
+          [`${imageType}_url`]: "" // Note // We setState with array for the key when we set a dynamic key 
+        })
+      }
+    }).catch (error => {
+      console.log("deleteImage error", error)
+    })
   }
 
   componentDidUpdate() { // Note // const obj1 = {} // Object.keys(obj1).length will return 0 in this case
@@ -59,7 +70,7 @@ export default class PortfolioForm extends Component {
         logo_url 
       } = this.props.portfolioToEdit;
 
-      this.props.ClearPortfolioToEdit();
+      this.props.ClearPortfolioToEdit(); //Question //
 
       this.setState({
         id: id,
@@ -139,8 +150,9 @@ export default class PortfolioForm extends Component {
 
 
   handleChange(event) {
+    //Note // debugger;
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value 
     })
   }
 
