@@ -14,9 +14,6 @@ export default class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  // alexrunner002@gmail.com
-  //Runner1994@ 
-  //health4me app.
 
   handleChange(event) {
     this.setState({
