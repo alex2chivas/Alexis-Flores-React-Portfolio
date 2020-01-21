@@ -6,8 +6,15 @@ export default class BlogDetail extends Component {
     super(props);
     this.state = {
       currentId: this.props.match.params.slug, // Note // We are calling props from the route not from the blog file. 
-      blogItem: {}
+      blogItem: {},
+      link: this.props.history
     }
+
+    this.clickHandler = this.clickHandler.bind(this);
+  }
+
+  clickHandler() {
+    this.state.link.goBack()
   }
 
   getBlogItem() {
@@ -26,7 +33,8 @@ export default class BlogDetail extends Component {
   }
 
   render() {
-    const {title, 
+    const {
+      title, 
       content, 
       featured_image_url, 
       blog_status} = this.state.blogItem
@@ -35,7 +43,7 @@ export default class BlogDetail extends Component {
       <div className="blog-container">
         <div className='content-container'>  
           <div className="title">
-            <h1>{title}</h1>
+            <a onClick={this.clickHandler}>{title}</a>
           </div>
           
           <div className='featured-image-wrapper'>
@@ -50,3 +58,4 @@ export default class BlogDetail extends Component {
     );
   }
 }
+
