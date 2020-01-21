@@ -36,7 +36,7 @@ export default class PortfolioForm extends Component {
     
     this.thumbRef = React.createRef(); //Note // This will interact with the actual DOM and not the virtual DOM. Lets you grab in item by calling React.creatRef();
     this.bannerRef = React.createRef();
-    this.logoRef = React.createRef();
+    this.logoRef = React.createRef(); // NOte //create a refernce object, and can put in the JSX code and call it from anywhere
 
   }
 
@@ -173,7 +173,7 @@ export default class PortfolioForm extends Component {
         position: "",
         url: "",
         thumb_image: "",
-        banner_image: "",
+        banner_image: "", // This is just the state of our components and will not really remove the images
         logo: "",
         editMode: false, 
         apiUrl: "https://alexisflores.devcamp.space/portfolio/portfolio_items",
@@ -181,7 +181,7 @@ export default class PortfolioForm extends Component {
   
       });
   
-      [this.thumbRef, this.bannerRef, this.logoRef].forEach((ref) => {
+      [this.thumbRef, this.bannerRef, this.logoRef].forEach((ref) => { // This is diretly into the dom
         // debugger;
         ref.current.dropzone.removeAllFiles(); //Note // ref.current is reaching into the specific item
       })                                        // This will help clear the drop zones
