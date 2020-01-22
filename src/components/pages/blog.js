@@ -17,18 +17,17 @@ class Blog extends Component {
         };
 
         this.getBlogItems = this.getBlogItems.bind(this);
-        this.activateInfiniteScroll(); // Note // We can call it since we need to have it activity at all times // Note // this is for Element.scrollTop = document.documentElement.scrollTop                                
+        this.onScroll = this.onScroll.bind(this); // Note this.onScroll() // We can call it since we need to have it activity at all times // Note // this is for Element.scrollTop = document.documentElement.scrollTop                                
+        window.addEventListener("scroll", this.onScroll, false) // Note // Make sure I pay attention for memory leak and use the lifecylce hooks  
     }
 
-    activateInfiniteScroll() {
-        window.onscroll = () => {
-            if( this.state.isLoading || this.state.blogItems.length === this.state.totalCount) {
-                return;
-            }    
+    onScroll() {
+        if( this.state.isLoading || this.state.blogItems.length === this.state.totalCount) {
+            return;
+        }    
 
-            if(window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-                this.getBlogItems()
-            }
+        if(window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+            this.getBlogItems()
         }
     }
 
@@ -53,6 +52,10 @@ class Blog extends Component {
 
     componentDidMount(){
         this.getBlogItems()
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.onScroll, false)
     }
 
     render() {
