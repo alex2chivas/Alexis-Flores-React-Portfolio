@@ -12,6 +12,19 @@ class Blog extends Component {
         };
 
         this.getBlogItems = this.getBlogItems.bind(this);
+        this.activateInfiniteScroll(); // Note // We can call it since we need to have it activity at all times // Note // this is for Element.scrollTop = document.documentElement.scrollTop                                
+    }
+
+    activateInfiniteScroll() {
+        window.onscroll = () => {
+            console.log("window.innerHeight", window.innerHeight)
+            console.log("document.documentElement.scrollTop", document.documentElement.scrollTop)
+            console.log("document.documentElement.offset", document.documentElement.offsetHeight)
+
+            if(window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+                console.log("get more post")
+            }
+        }
     }
 
     getBlogItems() {

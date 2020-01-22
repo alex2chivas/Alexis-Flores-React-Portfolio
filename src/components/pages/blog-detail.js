@@ -10,10 +10,10 @@ export default class BlogDetail extends Component {
       link: this.props.history
     }
 
-    this.clickHandler = this.clickHandler.bind(this);
+    this.clickHandlerPrevPage = this.clickHandlerPrevPage.bind(this);
   }
 
-  clickHandler() {
+  clickHandlerPrevPage() {
     this.state.link.goBack()
   }
 
@@ -43,7 +43,7 @@ export default class BlogDetail extends Component {
       <div className="blog-container">
         <div className='content-container'>  
           <div className="title">
-            <a onClick={this.clickHandler}>{title}</a>
+            <a onClick={this.clickHandlerPrevPage}>{title}</a>
           </div>
           
           <div className='featured-image-wrapper'>

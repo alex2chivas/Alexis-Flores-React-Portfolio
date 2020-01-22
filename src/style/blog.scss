@@ -12,7 +12,6 @@
       text-decoration: none;
       color: $teal;
       transition: 0.5 ease-in-out;
-      @include border-bottom-transparent();
 
       &:hover {
         color: $dark-teal
@@ -24,14 +23,12 @@
         cursor: pointer;
         font-size: 2em;
         color: $teal;
-        @include border-bottom-transparent();
         width: fit-content;
         transition: 0.5s ease-in-out;
         
 
         &:hover {
           color: $darker-teal;
-          border-bottom: 1px solid $darker-teal;
         }
       }
     }
