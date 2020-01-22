@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {Link} from 'react-router-dom'
 import axios from 'axios';
 
 import BlogItem from '../blog/blog-item';
@@ -8,7 +10,10 @@ class Blog extends Component {
         super();
 
         this.state = {
-            blogItems: []
+            blogItems: [],
+            totalCount: 0,
+            currentPage: 0,
+            isLoading: true
         };
 
         this.getBlogItems = this.getBlogItems.bind(this);
@@ -17,23 +22,29 @@ class Blog extends Component {
 
     activateInfiniteScroll() {
         window.onscroll = () => {
-            console.log("window.innerHeight", window.innerHeight)
-            console.log("document.documentElement.scrollTop", document.documentElement.scrollTop)
-            console.log("document.documentElement.offset", document.documentElement.offsetHeight)
+            if( this.state.isLoading || this.state.blogItems.length === this.state.totalCount) {
+                return;
+            }    
 
             if(window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-                console.log("get more post")
+                this.getBlogItems()
             }
         }
     }
 
     getBlogItems() {
-        axios.get("https://alexisflores.devcamp.space/portfolio/portfolio_blogs", 
+        this.setState({
+            currentPage: this.state.currentPage + 1
+        })
+        axios.get(`https://alexisflores.devcamp.space/portfolio/portfolio_blogs?page=${this.state.currentPage}`, //  Note // This is for a page parameter 
         {
             withCredentials: true
-        }).then(response => {
-            this.setState({
-                blogItems: response.data.portfolio_blogs
+        }).then(response => { // Note // reponse.data.meta.total_records // This will let us know how many record are actually in API request
+            console.log("getting", response.data)
+            this.setState({ 
+                blogItems: this.state.blogItems.concat(response.data.portfolio_blogs),
+                totalCount: response.data.meta.total_records,
+                isLoading: false
             })
         }).catch(error => {
             console.log("getBlogItems error", error)
@@ -53,6 +64,12 @@ class Blog extends Component {
                 <div className='content-container'> 
                     {blogRecords}
                 </div>
+                
+                {this.state.isLoading ? ( 
+                <div className="content-loader">
+                    <FontAwesomeIcon icon="spinner" spin/>
+                </div>
+                ) : null}
             </div>
         )
     };
