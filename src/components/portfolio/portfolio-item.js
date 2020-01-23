@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 export default class PortfolioItem extends Component {
   constructor(props) {
@@ -37,7 +36,7 @@ export default class PortfolioItem extends Component {
 
         <div className="img-text-wrapper">
           <div className="logo-wrapper">
-            <img src={logo_url} />
+            <img src={logo_url}/>
           </div>
 
           <div className="subtitle">{description}</div>

@@ -182,7 +182,7 @@ export default class PortfolioForm extends Component {
       });
   
       [this.thumbRef, this.bannerRef, this.logoRef].forEach((ref) => { // This is diretly into the dom
-        // debugger;
+        // Question // where is this information being grabbed from???
         ref.current.dropzone.removeAllFiles(); //Note // ref.current is reaching into the specific item
       })                                        // This will help clear the drop zones
     })
