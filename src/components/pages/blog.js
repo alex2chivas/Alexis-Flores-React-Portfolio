@@ -15,18 +15,25 @@ class Blog extends Component {
             totalCount: 0,
             currentPage: 0,
             isLoading: true,
-            blogModalisOpen: false,
+            blogModalisOpen: false
         };
 
         this.getBlogItems = this.getBlogItems.bind(this);
         this.onScroll = this.onScroll.bind(this); // Note this.onScroll() // We can call it since we need to have it activity at all times // Note // this is for Element.scrollTop = document.documentElement.scrollTop                                
-        window.addEventListener("scroll", this.onScroll, false) // Note // Make sure I pay attention for memory leak and use the lifecylce hooks  
-        this.handleNewBlogClick = this.handleNewBlogClick.bind(this)
+        window.addEventListener("scroll", this.onScroll, false); // Note // Make sure I pay attention for memory leak and use the lifecylce hooks  
+        this.handleNewBlogClick = this.handleNewBlogClick.bind(this);
+        this.handleModalClose = this.handleModalClose.bind(this)
+    }
+
+    handleModalClose(){
+        this.setState({
+            blogModalisOpen: false
+        })
     }
 
     handleNewBlogClick () {
         this.setState({
-            blogModalisOpen: true,
+            blogModalisOpen: true
         })
     }
 
@@ -73,7 +80,10 @@ class Blog extends Component {
         })
         return (
             <div className="blog-container">
-                <BlogModal modalIsopen={this.state.blogModalisOpen}/>
+                <BlogModal 
+                modalIsopen={this.state.blogModalisOpen}
+                handleModalClose={this.handleModalClose}
+                />
 
                 <div className="new-blog-link">
                     <a onClick={this.handleNewBlogClick}>
