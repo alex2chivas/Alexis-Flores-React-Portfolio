@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import axios from 'axios';
 
 import BlogItem from '../blog/blog-item';
+import BlogModal from '../modals/blog-modal'
 
 class Blog extends Component {
     constructor() {
@@ -13,12 +14,20 @@ class Blog extends Component {
             blogItems: [],
             totalCount: 0,
             currentPage: 0,
-            isLoading: true
+            isLoading: true,
+            blogModalisOpen: false,
         };
 
         this.getBlogItems = this.getBlogItems.bind(this);
         this.onScroll = this.onScroll.bind(this); // Note this.onScroll() // We can call it since we need to have it activity at all times // Note // this is for Element.scrollTop = document.documentElement.scrollTop                                
         window.addEventListener("scroll", this.onScroll, false) // Note // Make sure I pay attention for memory leak and use the lifecylce hooks  
+        this.handleNewBlogClick = this.handleNewBlogClick.bind(this)
+    }
+
+    handleNewBlogClick () {
+        this.setState({
+            blogModalisOpen: true,
+        })
     }
 
     onScroll() {
@@ -43,7 +52,7 @@ class Blog extends Component {
             this.setState({ 
                 blogItems: this.state.blogItems.concat(response.data.portfolio_blogs),
                 totalCount: response.data.meta.total_records,
-                isLoading: false
+                isLoading: false,
             })
         }).catch(error => {
             console.log("getBlogItems error", error)
@@ -64,6 +73,14 @@ class Blog extends Component {
         })
         return (
             <div className="blog-container">
+                <BlogModal modalIsopen={this.state.blogModalisOpen}/>
+
+                <div className="new-blog-link">
+                    <a onClick={this.handleNewBlogClick}>
+                        Open Modal
+                    </a>
+                </div>
+
                 <div className='content-container'> 
                     {blogRecords}
                 </div>
