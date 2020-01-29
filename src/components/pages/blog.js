@@ -7,8 +7,8 @@ import BlogItem from '../blog/blog-item';
 import BlogModal from '../modals/blog-modal'
 
 class Blog extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             blogItems: [],
@@ -64,7 +64,6 @@ class Blog extends Component {
         {
             withCredentials: true
         }).then(response => { // Note // reponse.data.meta.total_records // This will let us know how many record are actually in API request
-            console.log("getting", response.data)
             this.setState({ 
                 blogItems: this.state.blogItems.concat(response.data.portfolio_blogs),
                 totalCount: response.data.meta.total_records,
@@ -95,11 +94,14 @@ class Blog extends Component {
                 handleModalClose={this.handleModalClose}
                 />
 
-                <div className="new-blog-link">
-                    <a onClick={this.handleModalOpen}>
-                        <FontAwesomeIcon icon="plus-square"/>
-                    </a>
-                </div>
+                { this.props.loggedInStatus === "LOGGED_IN" ? 
+                    <div className="new-blog-link">
+                        <a onClick={this.handleModalOpen}>
+                            <FontAwesomeIcon icon="plus-square"/>
+                        </a>
+                    </div>
+                :
+                null}
 
                 <div className='content-container'> 
                     {blogRecords}
