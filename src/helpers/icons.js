@@ -5,4 +5,5 @@ const Icons = () => {
   return library.add(faTrash, faSignOutAlt, faEdit, faMinusCircle, faSpinner, faPlusSquare)
 }
 
-export default Icons;
+export default Icons; // NoteTwo // This is a javascript funtion that can be passed anywhere. You can also make a api if you like and pass the 
+// whatever information you want and have a cleaner code bass. 
