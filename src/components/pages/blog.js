@@ -97,7 +97,7 @@ class Blog extends Component {
 
                 <div className="new-blog-link">
                     <a onClick={this.handleModalOpen}>
-                        Open Modal
+                        <FontAwesomeIcon icon="plus-square"/>
                     </a>
                 </div>
 
