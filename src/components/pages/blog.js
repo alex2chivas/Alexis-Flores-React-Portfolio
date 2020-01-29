@@ -21,8 +21,17 @@ class Blog extends Component {
         this.getBlogItems = this.getBlogItems.bind(this);
         this.onScroll = this.onScroll.bind(this); // Note this.onScroll() // We can call it since we need to have it activity at all times // Note // this is for Element.scrollTop = document.documentElement.scrollTop                                
         window.addEventListener("scroll", this.onScroll, false); // Note // Make sure I pay attention for memory leak and use the lifecylce hooks  
-        this.handleNewBlogClick = this.handleNewBlogClick.bind(this);
+        this.handleModalOpen = this.handleModalOpen.bind(this);
         this.handleModalClose = this.handleModalClose.bind(this)
+        this.handleSuccessNewBlogSubmission = this.handleSuccessNewBlogSubmission.bind(this)
+    }
+
+    // NoteOne // This is a gradParent folder coming from granchild blog-form data
+    handleSuccessNewBlogSubmission(blog) { 
+        this.setState({
+            blogItems: [blog].concat(this.state.blogItems), // Example // const one = [1,2,3]; const two = 0; const newArray = [two].concat(one); newArray - output - [0,1,2,3]
+            blogModalisOpen: false, 
+        })
     }
 
     handleModalClose(){
@@ -31,7 +40,7 @@ class Blog extends Component {
         })
     }
 
-    handleNewBlogClick () {
+    handleModalOpen () {
         this.setState({
             blogModalisOpen: true
         })
@@ -81,12 +90,13 @@ class Blog extends Component {
         return (
             <div className="blog-container">
                 <BlogModal 
+                handleSuccessNewBlogSubmission={this.handleSuccessNewBlogSubmission}
                 modalIsopen={this.state.blogModalisOpen}
                 handleModalClose={this.handleModalClose}
                 />
 
                 <div className="new-blog-link">
-                    <a onClick={this.handleNewBlogClick}>
+                    <a onClick={this.handleModalOpen}>
                         Open Modal
                     </a>
                 </div>

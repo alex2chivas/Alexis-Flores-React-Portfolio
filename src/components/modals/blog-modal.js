@@ -21,15 +21,16 @@ export default class BlogModal extends Component {
       },
       overlay: {
         backgroundColor       : 'rgba(1, 1, 1, 0.85)',
-        position: 'fixed'
+        position              : 'fixed'
       }
     };
 
     this.handleSuccessFormSubmission = this.handleSuccessFormSubmission.bind(this)
   }
 
-  handleSuccessFormSubmission(blog) {
-    console.log("blog from blog form", blog)
+  // NoteOne // this is the parent component and getting data from the child component in blog-form file
+  handleSuccessFormSubmission(blog) { 
+    this.props.handleSuccessNewBlogSubmission(blog)
   }
 
   render() {

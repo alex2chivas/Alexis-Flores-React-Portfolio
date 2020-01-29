@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from "axios";
 
 export default class BlogForm extends Component {
   constructor(props) {
@@ -12,8 +13,31 @@ export default class BlogForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  buildForm () {
+    let formData = new FormData();
+
+    formData.append("portfolio_blog[title]", this.state.title);
+    formData.append("portfolio_blog[blog_status]", this.state.blog_status);
+
+    return formData;
+  }
+
+  // NoteOne // This is the function that post api and provides information for the parent and the grandparent data
   handleSubmit (event) {
-    this.props.handleSuccessFormSubmission(this.state)
+    axios.post("https://alexisflores.devcamp.space/portfolio/portfolio_blogs", this.buildForm(),
+    {
+      withCredentials: true
+    }).then(response => {
+      this.props.handleSuccessFormSubmission(response.data.portfolio_blog); // NoteOne // We are passing the reponse over to the parent component
+    }).catch(error => {
+      console.log("api error for blog modal", error)
+    })
+
+    this.setState({
+      title: "",
+      blog_status: ""
+    });
+
     event.preventDefault();
   }
 
@@ -34,13 +58,11 @@ export default class BlogForm extends Component {
           value={this.state.title}
         />
 
-        <input
-          type="text"
-          onChange={this.handleChange}
-          name="blog_status"
-          placeholder="Blog status"
-          value={this.state.blog_status}
-        />
+        <select
+          type="text" onChange={this.handleChange} name="blog_status" value={this.state.blog_status}>
+            <option value="draft">Draft</option>
+            <option value="published">Published</option>
+        </select>
 
         <button>Save</button>
       </form>    );
