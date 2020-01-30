@@ -8,11 +8,18 @@ export default class BlogForm extends Component {
     super(props);
     this.state = {
       title: "",
-      blog_status: ""
+      blog_status: "",
+      content: ""
     }
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRichTextEditorChange = this.handleRichTextEditorChange.bing(this)
+  }
+
+  // NoteTwo // This handleChange is a prop for rich-text-editor file
+  handleRichTextEditorChange(content) {
+    this.setState({content /* NoteTwo // If the key and the value of are the same name like in this case we do not need to use content:content*/})
   }
 
   buildForm () {
@@ -20,6 +27,7 @@ export default class BlogForm extends Component {
 
     formData.append("portfolio_blog[title]", this.state.title);
     formData.append("portfolio_blog[blog_status]", this.state.blog_status);
+    formData.append("portfolio_blog[content]", this.state.content);
 
     return formData;
   }
@@ -67,9 +75,11 @@ export default class BlogForm extends Component {
               <option value="published">Published</option>
           </select>
         </div>
-        
+
         <div className="one-column">
-          <RichTextEditor/>
+          <RichTextEditor
+            handleRichTextEditorChange={this.handleRichTextEditorChange}
+          />
         </div>
 
         <button className="btn">Save</button>
