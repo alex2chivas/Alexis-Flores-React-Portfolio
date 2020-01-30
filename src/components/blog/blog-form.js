@@ -14,7 +14,7 @@ export default class BlogForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleRichTextEditorChange = this.handleRichTextEditorChange.bing(this)
+    this.handleRichTextEditorChange = this.handleRichTextEditorChange.bind(this)
   }
 
   // NoteTwo // This handleChange is a prop for rich-text-editor file
