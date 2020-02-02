@@ -11,7 +11,7 @@ export default class PortfolioForm extends Component {
     super(props);
 
     this.state = {
-      name:"", 
+      name: "", 
       description: "",
       category: "eCommerce",
       position: "",
