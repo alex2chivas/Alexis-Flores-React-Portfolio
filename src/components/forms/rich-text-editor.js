@@ -19,7 +19,7 @@ export default class RichTextEditor extends Component{
   onEditorStateChange(editorState) {
     // NoteTwo // By adding the second argument we can make the setState wait since it's asyn so it has to complete before moving forward
     this.setState(
-      { editorState }, 
+      { editorState },
       this.props.handleRichTextEditorChange(
         draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))
     )

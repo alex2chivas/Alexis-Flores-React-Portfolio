@@ -38,15 +38,16 @@ export default class BlogForm extends Component {
     {
       withCredentials: true
     }).then(response => {
+        this.setState({
+          title: "",
+          blog_status: "",
+          content: ""
+      });
+  
       this.props.handleSuccessFormSubmission(response.data.portfolio_blog); // NoteOne // We are passing the reponse over to the parent component
     }).catch(error => {
       console.log("api error for blog modal", error)
     })
-
-    this.setState({
-      title: "",
-      blog_status: ""
-    });
 
     event.preventDefault();
   }
