@@ -1,21 +1,51 @@
 import React, {Component} from 'react';
 import axios from "axios";
+import DropzoneComponent from "react-dropzone-component";
 
 import RichTextEditor from "../forms/rich-text-editor"
 
 export default class BlogForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       title: "",
       blog_status: "",
-      content: ""
+      content: "",
+      featured_image:""
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRichTextEditorChange = this.handleRichTextEditorChange.bind(this)
+    this.componentConfig = this.componentConfig.bind(this);
+    this.djsConfig = this.djsConfig.bind(this);
+    this.handleFeaturedImageDrop = this.handleFeaturedImageDrop.bind(this);
+
   }
+
+  handleFeaturedImageDrop() {
+    return {
+      addedFile: file => this.setState({ featured_image: file })
+    };
+  }
+
+
+  componentConfig() {
+    return {
+      iconFiletypes: [".jpg", ".png"],
+      showFiletypeIcon: true,
+      postUrl: "https://httpbin.org/post"// We will pass mock url so it does not upload the image automatically
+    }
+  }
+
+  djsConfig() {
+    return {
+      addRemoveLinks: true,
+      maxFiles: 1
+    }
+  }
+
 
   // NoteTwo // This handleChange is a prop for rich-text-editor file
   handleRichTextEditorChange(content) {
@@ -81,6 +111,18 @@ export default class BlogForm extends Component {
           <RichTextEditor
             handleRichTextEditorChange={this.handleRichTextEditorChange}
           />
+        </div>
+
+        <div className="image-uploaders">
+          <DropzoneComponent
+            config={this.componentConfig()}
+            djsConfig={this.djsConfig()}
+            // NoteThree // It is called eventHandlers because the component DropzoneComponent has a vast list of functions
+            // for exmapls like addFile this is located inside the handleFeaturedImageDrop
+            eventHandlers={this.handleFeaturedImageDrop()}          
+          >
+            <div className="dz-message">Featured Image</div> 
+          </DropzoneComponent>
         </div>
 
         <button className="btn">Save</button>
