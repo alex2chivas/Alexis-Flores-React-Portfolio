@@ -1,23 +1,24 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import ReactHtmlParser from "react-html-parser";
+import { withRouter } from "react-router";
 
 import BlogFeaturedImage from "../blog/blog-featured.image"
 
-export default class BlogDetail extends Component {
+class BlogDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentId: this.props.match.params.slug, // Note // We are calling props from the route not from the blog file. 
       blogItem: {},
-      link: this.props.history
     }
 
     this.clickHandlerPrevPage = this.clickHandlerPrevPage.bind(this);
   }
 
+  //NoteThree // using higher order function
   clickHandlerPrevPage() {
-    this.state.link.goBack()
+    this.props.history.goBack()
   }
 
   getBlogItem() {
@@ -59,4 +60,6 @@ export default class BlogDetail extends Component {
     );
   }
 }
+
+export default withRouter(BlogDetail)
 

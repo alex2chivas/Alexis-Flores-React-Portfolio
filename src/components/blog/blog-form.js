@@ -18,18 +18,13 @@ export default class BlogForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRichTextEditorChange = this.handleRichTextEditorChange.bind(this)
+
     this.componentConfig = this.componentConfig.bind(this);
     this.djsConfig = this.djsConfig.bind(this);
     this.handleFeaturedImageDrop = this.handleFeaturedImageDrop.bind(this);
 
+    this.featuredImageRef = React.createRef()
   }
-
-  handleFeaturedImageDrop() {
-    return {
-      addedFile: file => this.setState({ featured_image: file })
-    };
-  }
-
 
   componentConfig() {
     return {
@@ -46,10 +41,16 @@ export default class BlogForm extends Component {
     }
   }
 
+  handleFeaturedImageDrop() {
+    return {
+      addedFile: file => this.setState({ featured_image: file })
+    };
+  }  
 
   // NoteTwo // This handleChange is a prop for rich-text-editor file
   handleRichTextEditorChange(content) {
-    this.setState({content /* NoteTwo // If the key and the value of are the same name like in this case we do not need to use content:content*/})
+    /* NoteTwo // If the key and the value of are the same name like in this case we do not need to use content:content*/
+    this.setState({content })
   }
 
   buildForm () {
@@ -58,6 +59,13 @@ export default class BlogForm extends Component {
     formData.append("portfolio_blog[title]", this.state.title);
     formData.append("portfolio_blog[blog_status]", this.state.blog_status);
     formData.append("portfolio_blog[content]", this.state.content);
+
+    if (this.state.featured_image) {
+      formData.append(
+        "portfolio_blog[featured_image]", 
+        this.state.featured_image
+      );
+    }
 
     return formData;
   }
@@ -68,13 +76,23 @@ export default class BlogForm extends Component {
     {
       withCredentials: true
     }).then(response => {
-        this.setState({
-          title: "",
-          blog_status: "",
-          content: ""
+
+      if(this.state.featured_image){
+        this.featuredImageRef.current.dropzone.removeAllfiles()        
+      }
+
+      this.setState({
+        title: "",
+        blog_status: "draft",
+        content: "",
+        featured_image: ""
       });
+
   
-      this.props.handleSuccessFormSubmission(response.data.portfolio_blog); // NoteOne // We are passing the reponse over to the parent component
+      this.props.handleSuccessFormSubmission(
+        response.data.portfolio_blog
+      ); // NoteOne // We are passing the reponse over to the parent component
+
     }).catch(error => {
       console.log("api error for blog modal", error)
     })
@@ -100,11 +118,13 @@ export default class BlogForm extends Component {
             value={this.state.title}
           />
 
-          <select
-            type="text" onChange={this.handleChange} name="blog_status" value={this.state.blog_status}>
-              <option value="draft">Draft</option>
-              <option value="published">Published</option>
-          </select>
+          <input
+            type="text"
+            onChange={this.handleChange}
+            name="blog_status"
+            placeholder="Blog status"
+            value={this.state.blog_status}
+          />        
         </div>
 
         <div className="one-column">
@@ -115,10 +135,11 @@ export default class BlogForm extends Component {
 
         <div className="image-uploaders">
           <DropzoneComponent
+          // NoteThree // It is called eventHandlers because the component DropzoneComponent has a vast list of functions
+          // for exmaple is - addFile this is located inside the handleFeaturedImageDrop
+            ref={this.featuredImageRef}
             config={this.componentConfig()}
             djsConfig={this.djsConfig()}
-            // NoteThree // It is called eventHandlers because the component DropzoneComponent has a vast list of functions
-            // for exmapls like addFile this is located inside the handleFeaturedImageDrop
             eventHandlers={this.handleFeaturedImageDrop()}          
           >
             <div className="dz-message">Featured Image</div> 

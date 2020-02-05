@@ -34,7 +34,7 @@ export default class RichTextEditor extends Component{
               editorState={this.state.editorState}
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
-              onEditorStateChange={this.onEditorStateChange} // NoteTwo this is a prop passed in Editor
+              onEditorStateChange={this.onEditorStateChange} // NoteTwo // this is a prop passed in Editor
             />
         </div>
     );
