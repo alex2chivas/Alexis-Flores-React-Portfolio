@@ -65,7 +65,7 @@ export default class BlogForm extends Component {
         "portfolio_blog[featured_image]", 
         this.state.featured_image
       );
-    }
+    };
 
     return formData;
   }
