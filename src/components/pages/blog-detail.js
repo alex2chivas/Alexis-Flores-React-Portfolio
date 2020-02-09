@@ -3,7 +3,7 @@ import axios from 'axios';
 import ReactHtmlParser from "react-html-parser";
 import { withRouter } from "react-router";
 
-import BlogFeaturedImage from "../blog/blog-featured.image"
+import BlogFeaturedImage from "../blog/blog-featured.image";
 
 class BlogDetail extends Component {
   constructor(props) {
