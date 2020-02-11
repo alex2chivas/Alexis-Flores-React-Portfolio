@@ -22,7 +22,6 @@ export default class PortfolioForm extends Component {
       editMode: false, // Note // This helps create dynamic axio request with personalize Config setting in axios
       apiUrl: "https://alexisflores.devcamp.space/portfolio/portfolio_items",
       apiAction: "post"
-
     };
 
     this.handleChange = this.handleChange.bind(this)
