@@ -20,7 +20,7 @@ class Blog extends Component {
 
         this.getBlogItems = this.getBlogItems.bind(this);
         this.onScroll = this.onScroll.bind(this); // Note this.onScroll() // We can call it since we need to have it activity at all times // Note // this is for Element.scrollTop = document.documentElement.scrollTop                                
-        window.addEventListener("scroll", this.onScroll, false); // Note // Make sure I pay attention for memory leak and use the lifecylce hooks  
+        window.addEventListener("scroll", this.onScroll); // Note // Make sure I pay attention for memory leak and use the lifecylce hooks  
         this.handleModalOpen = this.handleModalOpen.bind(this);
         this.handleModalClose = this.handleModalClose.bind(this)
         this.handleSuccessNewBlogSubmission = this.handleSuccessNewBlogSubmission.bind(this)
@@ -79,7 +79,7 @@ class Blog extends Component {
     }
 
     componentWillUnmount() {
-        window.removeEventListener("scroll", this.onScroll, false)
+        window.removeEventListener("scroll", this.onScroll)
     }
 
     render() {
