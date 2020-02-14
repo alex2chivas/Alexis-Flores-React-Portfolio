@@ -9,6 +9,8 @@ export default class BlogForm extends Component {
     super(props);
 
     this.state = {
+      // NoteFour // This id is used for the blog-detail so it can keep track of what item it needs to update
+      id: "",
       title: "",
       blog_status: "",
       content: "",
@@ -26,6 +28,17 @@ export default class BlogForm extends Component {
     this.handleFeaturedImageDrop = this.handleFeaturedImageDrop.bind(this);
 
     this.featuredImageRef = React.createRef();
+  }
+
+  // NoteFour // This functionality is props from the blog detail
+  componentWillMount () {
+    if(this.props.editMode) {
+      this.setState({
+        id: this.props.blog.id,
+        title: this.props.blog.title,
+        blog_status: this.props.blog.blog_status
+      });
+    }
   }
 
   componentConfig() {
