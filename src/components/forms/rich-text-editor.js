@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { EditorState, convertToRaw} from "draft-js";
+import { EditorState, convertToRaw, ContentState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import  draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
@@ -29,13 +29,27 @@ export default class RichTextEditor extends Component{
     
   }
 
+  componentWillMount () {
+    if (this.props.editMode && this.props.contentToEdit) {
+      // NoteFour // The documentation is from the htmlToDraft that is recommend to take
+      const blockFromHtml = htmlToDraft(this.props.contentToEdit);
+      const {contentBlocks, entityMap} = blockFromHtml;
+      const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
+      // NoteFour // When EditorState is in edit this is the method that can make it happen
+      const editorState = EditorState.createWithContent(contentState);
+      this.setState({
+        editorState
+      });
+    };
+  };
+
   getBase64(file, callback) {
     // asyncronise function
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => callback(reader.result);
     reader.onerror = error => {};
-  }
+  };
   
   uploadFile(file) {
     // NoteFour // Base64 encoders
@@ -43,7 +57,7 @@ export default class RichTextEditor extends Component{
     return new Promise((resolve, reject) => {
       this.getBase64(file, data => resolve({ data: {link: data} }));
     });
-  }
+  };
 
   render() {
     return (
@@ -69,5 +83,5 @@ export default class RichTextEditor extends Component{
               }}            />
         </div>
     );
-  }
-}
+  };
+};
