@@ -13,4 +13,9 @@
     @include base-grid() ;
       grid-template-columns: 200px;
     }
+  .portfolio-manager-image-wrapper {
+    img {
+      height: 200px;
+    }
+  }
 }
