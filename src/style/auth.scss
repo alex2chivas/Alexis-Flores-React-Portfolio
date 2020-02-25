@@ -1,16 +1,11 @@
 .auth-page-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: calc(100vh - 84px);
+    @include two-page-columns();
 
     .left-column {
-        background-size: cover;
+        @include background-size();
     }
 
     .right-column {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: $offwhite;
+        @include justify-content();
     }
 }

@@ -1,0 +1,11 @@
+.about-page-wrapper {
+  @include two-page-columns();
+
+  .left-column {
+      @include background-size();
+  }
+
+  .right-column {
+      @include justify-content();
+  }
+}

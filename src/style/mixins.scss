@@ -48,3 +48,25 @@
 @mixin border-bottom-transparent {
     border-bottom: 1px solid transparent;
 }
+
+@mixin two-page-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100vw;
+    grid-gap: 45px;
+    height: calc(100vh - 84px);
+}
+
+@mixin background-size {
+    background-size: cover;
+    background-position: center;
+}
+
+@mixin justify-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: $offwhite;
+    padding: 75px;
+}
