@@ -25,11 +25,11 @@ export default class BlogModal extends Component {
       }
     };
 
-    this.handleSuccessFormSubmission = this.handleSuccessFormSubmission.bind(this)
+    this.handleSuccessfullFormSubmission = this.handleSuccessfullFormSubmission.bind(this)
   }
 
   // NoteOne // this is the parent component and getting data from the child component in blog-form file
-  handleSuccessFormSubmission(blog) { 
+  handleSuccessfullFormSubmission(blog) { 
     this.props.handleSuccessNewBlogSubmission(blog)
   }
 
@@ -42,7 +42,7 @@ export default class BlogModal extends Component {
         }} 
         isOpen={this.props.modalIsopen}>
           <BlogForm 
-           handleSuccessFormSubmission={this.handleSuccessFormSubmission}
+           handleSuccessfullFormSubmission={this.handleSuccessfullFormSubmission}
           />
       </ReactModal>
     )
