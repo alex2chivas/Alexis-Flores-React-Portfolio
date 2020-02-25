@@ -38,9 +38,11 @@ class BlogDetail extends Component {
   //NoteThree // using higher order function
   handleEditClick() {
     console.log("handle edit click")
-    this.setState({
-      editMode: true
-    })
+    if (this.props.loggedInStatus === "LOGGED_IN") {
+      this.setState({
+        editMode: true
+      });
+    };
   }
 
 
