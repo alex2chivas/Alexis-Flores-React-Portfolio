@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {Link} from 'react-router-dom'
 import axios from 'axios';
 
 import BlogItem from '../blog/blog-item';
@@ -20,11 +19,25 @@ class Blog extends Component {
 
         this.getBlogItems = this.getBlogItems.bind(this);
         this.onScroll = this.onScroll.bind(this); // Note this.onScroll() // We can call it since we need to have it activity at all times // Note // this is for Element.scrollTop = document.documentElement.scrollTop                                
-        window.addEventListener("scroll", this.onScroll); // Note // Make sure I pay attention for memory leak and use the lifecylce hooks  
+        window.addEventListener("scroll", this.onScroll, false); // Note // Make sure I pay attention for memory leak and use the lifecylce hooks  
         this.handleModalOpen = this.handleModalOpen.bind(this);
         this.handleModalClose = this.handleModalClose.bind(this)
         this.handleSuccessNewBlogSubmission = this.handleSuccessNewBlogSubmission.bind(this)
+        this.handleDeleteClick = this.handleDeleteClick.bind(this)
     }
+
+    handleDeleteClick (blog) {
+        axios.delete(`https://api.devcamp.space/portfolio/portfolio_blogs/${blog.id}`, 
+        {
+            withCredentials: true
+        })
+        .then(response => {
+            console.log("res",response)
+        })
+        .catch(error => {
+            console.log("delete blog error", error)
+        });
+    };
 
     // NoteOne // This is a gradParent folder coming from granchild blog-form data
     handleSuccessNewBlogSubmission(blog) { 
@@ -67,7 +80,7 @@ class Blog extends Component {
             this.setState({ 
                 blogItems: this.state.blogItems.concat(response.data.portfolio_blogs),
                 totalCount: response.data.meta.total_records,
-                isLoading: false,
+                isLoading: false
             })
         }).catch(error => {
             console.log("getBlogItems error", error)
@@ -79,13 +92,24 @@ class Blog extends Component {
     }
 
     componentWillUnmount() {
-        window.removeEventListener("scroll", this.onScroll)
-    }
+        window.removeEventListener("scroll", this.onScroll, false)
+    } 
 
     render() {
         const blogRecords = this.state.blogItems.map(blogItem => {
-            return <BlogItem key={blogItem.id} blogItem={blogItem}/>
-        })
+            if (this.props.loggedInStatus === "LOGGED_IN") {
+              return (
+                <div key={blogItem.id} className="admin-blog-wrapper">
+                  <BlogItem blogItem={blogItem} />
+                  <a onClick={() => this.handleDeleteClick(blogItem)}>
+                    <FontAwesomeIcon icon="trash" />
+                  </a>
+                </div>
+              );
+            } else {
+              return <BlogItem key={blogItem.id} blogItem={blogItem} />;
+            }
+          });
         return (
             <div className="blog-container">
                 <BlogModal 
