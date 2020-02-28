@@ -81,7 +81,14 @@ export default class PortfolioManager extends Component {
   }
 
   componentDidMount() {
-    this.getPortfolioitems();
+    this.getPortfolioitems()
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      portfolioItems: [],
+      portfolioToEdit: {}
+    })
   }
 
   render() {

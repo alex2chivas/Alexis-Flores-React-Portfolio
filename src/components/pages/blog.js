@@ -87,12 +87,19 @@ class Blog extends Component {
         })
     }
 
-    componentDidMount(){
+    componentWillMount(){
         this.getBlogItems()
     }
 
     componentWillUnmount() {
         window.removeEventListener("scroll", this.onScroll, false)
+        this.setState({
+            blogItems: [],
+            totalCount: 0,
+            currentPage: 0,
+            isLoading: true,
+            blogModalisOpen: false
+        });
     } 
 
     render() {
