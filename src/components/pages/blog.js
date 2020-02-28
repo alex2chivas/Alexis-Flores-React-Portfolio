@@ -32,7 +32,13 @@ class Blog extends Component {
             withCredentials: true
         })
         .then(response => {
-            console.log("res",response)
+            this.setState({
+                blogItems: this.state.blogItems.filter(blogItem => {
+                    return blog.id !== blogItem.id
+                })
+            });
+
+            return response.data
         })
         .catch(error => {
             console.log("delete blog error", error)

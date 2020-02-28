@@ -4,6 +4,17 @@
   align-items: center;
   position: relative;
 
+  .admin-blog-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      margin-left: 15px;
+      cursor: pointer;
+    }
+  }
+
   .new-blog-link {
     position: fixed; // NoteTwo // if child component has a postion absolute our parent component needs to have postion relative, we changed to fix to have them at the bottom.
     right: 0;
