@@ -3,6 +3,7 @@
 
   .left-column {
       @include background-size();
+      background-position-y: 20%;
   }
 
   .right-column {
