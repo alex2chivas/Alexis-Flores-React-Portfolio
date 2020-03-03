@@ -3,6 +3,9 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { withRouter } from "react-router";
 import { NavLink } from "react-router-dom";
+import DisplayName from "./display-name.js";
+
+
 
 const NavigationComponent = props => {
   const dynamicLink = (route, linkText) => {
@@ -14,6 +17,7 @@ const NavigationComponent = props => {
       </div>
     );
   };
+
 
   const handleSignOut = () => {
     axios
@@ -64,7 +68,8 @@ const NavigationComponent = props => {
       </div>
 
       <div className="right-side">
-        ALEXIS FLORES
+        {DisplayName()}
+        
         {props.loggedInStatus === "LOGGED_IN" ? (
           <a onClick={handleSignOut} /*Font// bottom icon="sign-out-alt" is the correct way to call an icon from the library */> 
           <FontAwesomeIcon icon="sign-out-alt"/> 
