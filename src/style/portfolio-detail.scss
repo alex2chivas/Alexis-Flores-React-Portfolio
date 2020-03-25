@@ -1,8 +1,13 @@
 .portfolio-detail-wrapper {
   width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
 
   .banner {
-    height: 380px;
+    height: 305px;
+    width: 55%;
     display: flex;
     justify-content: center;
     align-items: center;
