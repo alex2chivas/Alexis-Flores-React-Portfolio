@@ -184,7 +184,7 @@ export default class PortfolioForm extends Component {
 					apiUrl: 'https://alexisflores.devcamp.space/portfolio/portfolio_items',
 					apiAction: 'post'
 				});
-				window.scrollTo(0, 0);
+				
 				[ this.thumbRef, this.bannerRef, this.logoRef ].forEach((ref) => {
 					// This is diretly into the dom
 					// Question // where is this information being grabbed from???
