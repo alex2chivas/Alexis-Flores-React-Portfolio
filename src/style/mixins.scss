@@ -4,11 +4,11 @@
     font-size: 1em;
     font-weight: 500;
     border: 1px solid transparent;
-    transition: all 0.5s ease-in-out;
+    @include ease-in-out-1();
     background-color: $teal;
     color: white;
 
-    &:active, 
+    &:active,
     &:focus {
         outline: none;
     }
@@ -28,7 +28,7 @@
         border-left: 0px;
         border-bottom: 1px solid $teal;
         background-color: transparent;
-        transition: 0.5s all ease-in-out;
+        @include ease-in-out-1();
         font-size: 1.1em;
         margin-bottom: 21px;
 
@@ -68,4 +68,8 @@
     align-items: center;
     background-color: $offwhite;
     padding: 75px;
+}
+
+@mixin ease-in-out-1 {
+    transition: 0.5s all ease-out
 }

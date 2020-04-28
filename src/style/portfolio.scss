@@ -27,7 +27,7 @@
       padding-right: 100px;
 
       .subtitle {
-        transition: 1s ease-in;
+        @include ease-in-out-1();
         color: transparent;
       }
     }
@@ -45,6 +45,6 @@
 }
 
 .img-blur {
-  transition: 1s ease-in;
+  @include ease-in-out-1();
   filter: brightness(10%);
 }

@@ -17,7 +17,7 @@
         font-size: 1.5em;
 
       }
-      
+
       .actions {
 
         display: grid;
@@ -28,7 +28,7 @@
           cursor: pointer;
           color: $offwhite;
           font-size: 1.5em;
-          transition: 0.5s ease-in-out;
+          @include ease-in-out-1();
 
           &:hover {
             color: $warning;

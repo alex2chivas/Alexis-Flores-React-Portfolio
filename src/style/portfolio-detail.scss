@@ -39,7 +39,7 @@
       border-radius: 3px;
       text-decoration: none;
       color: white;
-      transition: 0.5s ease-in-out;
+      @include ease-in-out-1();
       font-size: 1.2em;
 
       &:hover {

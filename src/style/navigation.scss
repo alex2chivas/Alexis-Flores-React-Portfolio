@@ -1,47 +1,49 @@
 .nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+
+  .right-side {
     display: flex;
-    justify-content: space-between;
-    padding: 30px;
 
-    .right-side{
-      display: flex;
-      a{
-        margin-left: 15px;
-        cursor: pointer;
-        color: $teal;
-        transition: 0.5s ease-in-out;
+    a {
+      margin-left: 15px;
+      cursor: pointer;
+      color: $teal;
+      @include ease-in-out-1();
 
-        &:hover {
-          color: $dark-teal;
-        }
+      &:hover {
+        color: $dark-teal;
       }
     }
-  
-    .left-side {
-      display: flex;
-    }
-  
-    .nav-link-wrapper {
-      height: 22px;
+  }
+
+  .left-side {
+    display: flex;
+  }
+
+  .nav-link-wrapper {
+    height: 22px;
+    @include border-bottom-transparent();
+    margin-right: 20px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+
+    a {
+      color: $grey;
+      @include ease-in-out-1();
+      text-decoration: none;
       @include border-bottom-transparent();
-      margin-right: 20px;
-      text-transform: uppercase;
-      font-size: 0.9rem;
-  
-      a {
-        color: $grey;
-        transition: 0.5s ease-in-out;
-        text-decoration: none;
-        @include border-bottom-transparent();
-        &:hover {
-          color: black;
-          border-bottom: 1px solid black;
-        }
-      }
-  
-      .nav-link-active {
+
+      &:hover {
         color: black;
         border-bottom: 1px solid black;
       }
     }
+
+    .nav-link-active {
+      color: black;
+      border-bottom: 1px solid black;
+    }
   }
+}
