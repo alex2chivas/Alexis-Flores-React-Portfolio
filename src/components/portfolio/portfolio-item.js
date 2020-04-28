@@ -1,35 +1,36 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class PortfolioItem extends Component {
 	constructor(props) {
-		super(props)
+		super(props);
 
 		this.state = {
 			portfolioItemClass: ''
-		}
+		};
 	}
 
 	handleMouseEnter() {
-		this.setState({ portfolioItemClass: 'img-blur' })
+		this.setState({ portfolioItemClass: 'img-blur' });
 	}
 
 	handleMouseLeave() {
-		this.setState({ portfolioItemClass: '' })
+		this.setState({ portfolioItemClass: '' });
 	}
 
 	render() {
-		const { id, description, thumb_image_url, logo_url } = this.props.item
+		const { id, description, thumb_image_url, logo_url } = this.props.item;
 		return (
 			<Link to={`/portfolio/${id}`}>
 				<div
 					className='portfolio-item-wrapper'
 					onMouseEnter={() => {
-						this.handleMouseEnter()
+						this.handleMouseEnter();
 					}}
 					onMouseLeave={() => {
-						this.handleMouseLeave()
-					}}>
+						this.handleMouseLeave();
+					}}
+				>
 					<div
 						className={`portfolio-img-background ${this.state.portfolioItemClass}`}
 						style={{
@@ -46,6 +47,6 @@ export default class PortfolioItem extends Component {
 					</div>
 				</div>
 			</Link>
-		)
+		);
 	}
 }

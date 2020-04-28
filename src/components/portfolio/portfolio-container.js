@@ -1,44 +1,44 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React, { Component } from 'react';
+import axios from 'axios';
 
-import PortfolioItems from './portfolio-item'
+import PortfolioItems from './portfolio-item';
 
 export default class PortfolioContainer extends Component {
 	constructor() {
-		super()
+		super();
 
 		this.state = {
 			pageTitle: 'Welcome to my portfolio',
 			isLoading: false,
 			data: []
-		}
+		};
 
-		this.handleFilter = this.handleFilter.bind(this)
+		this.handleFilter = this.handleFilter.bind(this);
 	}
 
 	handleFilter(filter) {
-		filter === 'CLEAR_FILTERS' ? this.getPortfolioItems() : this.getPortfolioItems(filter)
+		filter === 'CLEAR_FILTERS' ? this.getPortfolioItems() : this.getPortfolioItems(filter);
 	}
 
 	getPortfolioItems(filter = null) {
 		axios
 			.get('https://alexisflores.devcamp.space/portfolio/portfolio_items')
-			.then((response) => {
+			.then(response => {
 				if (filter) {
 					this.setState({
-						data: response.data.portfolio_items.filter((item) => {
-							return item.category === filter
+						data: response.data.portfolio_items.filter(item => {
+							return item.category === filter;
 						})
-					})
+					});
 				} else {
 					this.setState({
 						data: response.data.portfolio_items
-					})
+					});
 				}
 			})
-			.catch((error) => {
-				console.log(error)
-			})
+			.catch(error => {
+				console.log(error);
+			});
 	}
 
 	portfolioItems() {
@@ -49,20 +49,19 @@ export default class PortfolioContainer extends Component {
 		// - id: id
 		// ---- Usable code to find certain things
 		// Object.keys(item)
-		return this.state.data.map((item) => {
-			return <PortfolioItems key={item.id} item={item} />
-		})
+		return this.state.data.map(item => {
+			return <PortfolioItems key={item.id} item={item} />;
+		});
 	}
 
 	componentDidMount() {
-		this.getPortfolioItems()
+		this.getPortfolioItems();
 	}
 
 	render() {
 		if (this.state.isLoading) {
-			return <div>Loading...</div>
+			return <div>Loading...</div>;
 		}
-
 		return (
 			<div className='homepage-wrapper'>
 				<div className='filter-links'>
@@ -81,7 +80,7 @@ export default class PortfolioContainer extends Component {
 				</div>
 				<div className='portfolio-items-wrapper'>{this.portfolioItems()}</div>
 			</div>
-		)
+		);
 	}
 }
 
