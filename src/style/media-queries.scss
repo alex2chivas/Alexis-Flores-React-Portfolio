@@ -1,6 +1,8 @@
-@media all and (max-width: 550px) {
+@media all and (max-width: 650px) {
 
   .nav-wrapper {
+    display: flex;
+    justify-content: center;
     padding: 0px;
     padding-top: 25px;
     padding-bottom: 25px;
